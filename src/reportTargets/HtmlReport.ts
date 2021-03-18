@@ -2,6 +2,8 @@ import fs from 'fs';
 import { OutputTarget } from '../Summary';
 
 export class HtmlReport implements OutputTarget {
+  constructor(public fileName: string) {}
+
   print(report: string): void {
     const html = `
       <div>
@@ -11,6 +13,6 @@ export class HtmlReport implements OutputTarget {
       `;
 
     //   Maybe i can implement to have the name of the file dynamic.
-    fs.writeFileSync('report.html', html);
+    fs.writeFileSync(`${this.fileName}.html`, html);
   }
 }
