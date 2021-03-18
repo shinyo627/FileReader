@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CsvFileReader = void 0;
 var fs_1 = __importDefault(require("fs"));
+// Making CsvFileReader with generic <T> that can hold any type
 var CsvFileReader = /** @class */ (function () {
     function CsvFileReader(fileName) {
         this.fileName = fileName;
@@ -18,7 +19,9 @@ var CsvFileReader = /** @class */ (function () {
             .split('\n')
             .map(function (row) {
             return row.split(',');
-        });
+        })
+            // *** Converting stringDate to Date and string to number in each row of string
+            .map(this.mapRow);
     };
     return CsvFileReader;
 }());
